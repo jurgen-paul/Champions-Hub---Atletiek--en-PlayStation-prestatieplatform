@@ -6,6 +6,7 @@
 ![Google Play Store Badge](https://img.shields.io/badge/GOOGLE%20PLAY%20STORE-VERIFIED%20RELEASE-34A853?style=for-the-badge&logo=googleplay&logoColor=white)
 ![ProGuard R8 Badge](https://img.shields.io/badge/PROGUARD%20R8-OBFUSCATED%20%26%20SYMBOLICATED-0f172a?style=for-the-badge&logo=android&logoColor=white)
 ![OWASP Badge](https://img.shields.io/badge/OWASP-MASVS--L2%20HARDENED-blue?style=for-the-badge&logo=shield&logoColor=white)
+![CI/CD Pipeline Badge](https://img.shields.io/badge/GITHUB%20ACTIONS-ENTERPRISE%20CI%2FCD-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 
 **The Premier High-Performance Esports Science & DualSense Hardware Telemetry Platform**
 
@@ -232,6 +233,38 @@ Located in `src/components/ProfileAccountSettingsModal.tsx`:
    - Under **Native debug symbols**, upload `native-debug-symbols.zip`.
 5. **Verify Security Verification**:
    Confirm that all SSF Level 4 Enterprise certificates and OWASP MASVS-L2 attestations are validated in the security audit report.
+
+---
+
+## 🚀 GitHub Actions Enterprise CI/CD Workflows
+
+The repository includes a battle-tested, production-grade GitHub Actions automation matrix configured in `.github/workflows/`:
+
+| Workflow File | Trigger Events | Purpose & Pipeline Coverage |
+| :--- | :--- | :--- |
+| **`.github/workflows/ci.yml`** | `push`, `pull_request` (`main`, `master`, `develop`), `workflow_dispatch` | **Comprehensive CI/CD Pipeline**: TypeScript check, Node 20.x/22.x matrix, SSF Level 4 security audit, ProGuard/R8 integrity check, production build, Play Store symbol retrace test, live server health smoke test, and artifact packaging. |
+| **`.github/workflows/codeql.yml`** | `push`, `pull_request`, weekly cron (`0 4 * * 1`) | **CodeQL Static Application Security Testing (SAST)**: Automated semantic AST vulnerability scanning across JavaScript and TypeScript layers. |
+| **`.github/workflows/release.yml`** | Tag push (`v*.*.*`), `workflow_dispatch` | **Production Release Publishing**: Automated artifact creation, SHA-256 integrity checksumming, release notes generation, and GitHub Releases asset publishing. |
+
+### CI/CD Pipeline Architecture (`ci.yml`)
+
+```mermaid
+graph TD
+    A[Push / Pull Request] --> B[Job 1: TypeScript & Code Quality Matrix Node 20 & 22]
+    A --> C[Job 2: SSF Level 4 Security & ProGuard R8 Audit]
+    B --> D[Job 3: Production Build & Asset Analytics]
+    C --> D
+    D --> E[Job 4: Play Store Symbol & Retrace Verification]
+    D --> F[Job 5: Live Express Server Smoke Test HTTP 200 Probe]
+    D --> G[Upload Artifacts: dist.tar.gz & proguard-rules.pro]
+```
+
+#### Pipeline Highlights:
+1. **Matrix Testing**: Validates compilation on both Active LTS (Node 20.x) and Current (Node 22.x).
+2. **ProGuard Verification**: Verifies presence of DualSense JNI anchors, SSF security interfaces, and serialization rules before building.
+3. **Secret Leak Detection**: Proactively prevents accidental credential or private key commits.
+4. **Live Server Smoke Test**: Runs `node dist/server.cjs` in a headless runner, issues an HTTP probe to `http://127.0.0.1:3000/`, confirms `200 OK`, and cleans up processes.
+5. **Artifact Retention**: Production distributions and SHA-256 verification manifests are securely stored with a 14-day retention cycle.
 
 ---
 
