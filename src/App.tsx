@@ -22,6 +22,7 @@ import { LiveStreamDatasetView } from './components/LiveStreamDatasetView';
 import { SSFSecurityDocumentationView } from './components/SSFSecurityDocumentationView';
 import { PlayStationSyncModal } from './components/PlayStationSyncModal';
 import { PlayerComparisonModal } from './components/PlayerComparisonModal';
+import { ProfileAccountSettingsModal } from './components/ProfileAccountSettingsModal';
 import { 
   PSControllerIcon, 
   PSIconTriangle, 
@@ -51,6 +52,7 @@ export default function App() {
   // Modals
   const [isSyncModalOpen, setIsSyncModalOpen] = useState(false);
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [comparePlayer1, setComparePlayer1] = useState<Player | null>(INITIAL_PLAYERS[0]);
   const [isGlobalSyncing, setIsGlobalSyncing] = useState(false);
 
@@ -171,6 +173,7 @@ export default function App() {
         activeTab={activeTab}
         onSelectTab={setActiveTab}
         onOpenSyncModal={() => setIsSyncModalOpen(true)}
+        onOpenSettings={() => setIsSettingsModalOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -198,6 +201,7 @@ export default function App() {
                   setComparePlayer1(players[0]);
                   setIsCompareModalOpen(true);
                 }}
+                onOpenSettings={() => setIsSettingsModalOpen(true)}
               />
             </motion.div>
           )}
@@ -351,6 +355,12 @@ export default function App() {
         onClose={() => setIsCompareModalOpen(false)}
         players={players}
         initialPlayer1={comparePlayer1}
+      />
+
+      <ProfileAccountSettingsModal
+        isOpen={isSettingsModalOpen}
+        onClose={() => setIsSettingsModalOpen(false)}
+        onSaveNotification={showToast}
       />
 
       {/* Footer */}

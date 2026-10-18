@@ -40,6 +40,7 @@ interface DashboardOverviewProps {
   onNavigateToTab: (tab: NavigationTab) => void;
   onOpenSyncModal: () => void;
   onOpenCompareModal: () => void;
+  onOpenSettings?: () => void;
 }
 
 export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
@@ -50,6 +51,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
   onNavigateToTab,
   onOpenSyncModal,
   onOpenCompareModal,
+  onOpenSettings,
 }) => {
   // Calculate aggregate stats
   const avgReadiness = Math.round(
@@ -159,9 +161,14 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               <span>SSF L4</span>
             </button>
 
-            <div className="w-8 h-8 rounded-full bg-[#00439c] border-2 border-white shadow-sm flex items-center justify-center text-white font-bold text-xs">
+            <button 
+              id="dash-profile-settings-btn"
+              onClick={onOpenSettings}
+              className="w-8 h-8 rounded-full bg-[#00439c] hover:bg-[#00367d] border-2 border-white shadow-sm flex items-center justify-center text-white font-bold text-xs transition-transform hover:scale-105 cursor-pointer"
+              title="Coach Profile & Hardware Settings"
+            >
               JD
-            </div>
+            </button>
           </div>
         </div>
       </header>

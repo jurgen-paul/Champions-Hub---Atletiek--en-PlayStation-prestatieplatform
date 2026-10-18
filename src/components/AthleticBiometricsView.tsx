@@ -34,6 +34,7 @@ import {
   LineChart, 
   Line 
 } from 'recharts';
+import { AthleteBiometricTrendsVisualizer } from './AthleteBiometricTrendsVisualizer';
 
 interface AthleticBiometricsViewProps {
   players: Player[];
@@ -151,6 +152,9 @@ export const AthleticBiometricsView: React.FC<AthleticBiometricsViewProps> = ({
           );
         })}
       </div>
+
+      {/* Interactive Recharts Biometric Trends Visualizer (Heart Rate, Recovery, Fatigue) */}
+      <AthleteBiometricTrendsVisualizer athlete={activeAthlete} />
 
       {/* Detailed Athletic Panel for Selected Athlete */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
