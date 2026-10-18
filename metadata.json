@@ -1,0 +1,6 @@
+{
+  "name": "Champions Hub - Athletic & PlayStation Performance Platform",
+  "description": "Professional platform for esports athletes and coaches managing physical athletic performance data, live stream game datasets, PlayStation telemetry synchronization, SSF security compliance, and Play Store release symbol debugging.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
